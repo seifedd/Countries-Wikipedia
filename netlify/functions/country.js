@@ -3,12 +3,22 @@ const axios = require('axios');
 exports.handler = async (event, context) => {
   // Extract country name from the path: /.netlify/functions/country/Brazil
   const pathParts = event.path.split('/');
-  const name = pathParts[pathParts.length - 1];
+  let name = pathParts[pathParts.length - 1];
 
-  if (!name) {
+  // Basic Input Validation/Sanitization
+  if (!name || typeof name !== 'string') {
     return {
       statusCode: 400,
-      body: JSON.stringify({ error: 'Country name is required' }),
+      body: JSON.stringify({ error: 'Country name is required and must be a string' }),
+    };
+  }
+  
+  name = decodeURIComponent(name).trim().replace(/[<>]/g, ''); // Basic sanitization
+
+  if (name.length < 1 || name.length > 100) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({ error: 'Invalid country name length' }),
     };
   }
 
