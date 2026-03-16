@@ -1,0 +1,20 @@
+[build]
+  publish = "starter"
+  functions = "netlify/functions"
+
+[dev]
+  port = 3000
+
+# Redirect API calls to Netlify Functions
+[[redirects]]
+  from = "/api/country/:name"
+  to = "/.netlify/functions/country/:name"
+  status = 200
+
+[[redirects]]
+  from = "/api/location/:lat/:lng"
+  to = "/.netlify/functions/location/:lat/:lng"
+  status = 200
+
+# Netlify environment variables (set via Netlify UI or netlify env:set)
+# GEOCODE_API_KEY=your_key_here
