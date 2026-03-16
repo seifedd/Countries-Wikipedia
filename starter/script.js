@@ -1,5 +1,4 @@
 'use strict';
-const API_KEY = '9a6139dfee3d39f92da505e8867ffdd2';
 const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
 const container = document.querySelector('.container');
@@ -47,7 +46,7 @@ const RenderError = function(message) {
 //   });
 // };
 const getCountryData = function(country) {
-  fetch(`https://restcountries.com/v3.1/name/${country}`)
+  fetch(`/api/country/${country}`)
     .then(response => response.json())
     .then(data => data[0])
     .then(data => {
@@ -137,7 +136,7 @@ const whereAmI = function() {
   getLocation()
     .then(pos => {
       const { latitude, longitude } = pos.coords;
-      return fetch(`https://geocode.xyz/${latitude},${longitude}?geoit=json`);
+      return fetch(`/api/location/${latitude}/${longitude}`);
     })
     .then(response => {
       if (!response.ok) {
