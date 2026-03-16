@@ -1,7 +1,7 @@
 {
   "name": "countries-wikipedia",
   "version": "1.0.0",
-  "description": "https://countries-wikipedia.netlify.app/ (To review)",
+  "description": "https://countries-wikipedia-1773640375.netlify.app/ (To review)",
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
